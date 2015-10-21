@@ -52,7 +52,11 @@ public final class H2AuctionsTest {
         verifyAllBidsForItem(2, 1, allBids, 1, ImmutableList.of(item1Bid));
     }
 
-    private static void verifyAllBidsForItem(int itemCount, int userCount, Iterable<Bid> bids, int itemId, Iterable<Bid> expectedItemBids) {
+    private static void verifyAllBidsForItem(final int itemCount,
+                                             final int userCount,
+                                             final Iterable<Bid> bids,
+                                             final int itemId,
+                                             final Iterable<Bid> expectedItemBids) {
         final H2Auctions sut = new H2Auctions();
         for (int i = 0; i < itemCount; i++) sut.listItem(new ItemRegistration());
         for (int i = 0; i < userCount; i++) sut.addUser(new UserRegistration());
@@ -105,7 +109,7 @@ public final class H2AuctionsTest {
         twoUsersBidOnTheSameItem(5, 5);
     }
 
-    private static H2Auctions twoUsersBidOnTheSameItem(int firstAmount, int secondAmount) throws BidException {
+    private static H2Auctions twoUsersBidOnTheSameItem(final int firstAmount, final int secondAmount) throws BidException {
         final H2Auctions sut = new H2Auctions();
         final Item item = sut.listItem(new ItemRegistration());
         final User user1 = sut.addUser(new UserRegistration());
