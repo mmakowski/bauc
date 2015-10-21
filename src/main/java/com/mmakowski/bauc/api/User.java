@@ -2,7 +2,7 @@ package com.mmakowski.bauc.api;
 
 import com.google.common.base.Objects;
 
-public class User {
+public final class User {
     public final int id;
     // TODO: other user attributes
 

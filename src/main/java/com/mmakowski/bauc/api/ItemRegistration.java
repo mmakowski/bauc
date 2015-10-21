@@ -1,5 +1,5 @@
 package com.mmakowski.bauc.api;
 
-public class ItemRegistration {
+public final class ItemRegistration {
     // TODO: item attributes
 }
