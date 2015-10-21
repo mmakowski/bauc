@@ -2,11 +2,11 @@ package com.mmakowski.bauc.api;
 
 import com.google.common.base.Objects;
 
-public final class Item {
+public class User {
     public final int id;
-    // TODO: other item attributes
+    // TODO: other user attributes
 
-    public Item(int id) {
+    public User(int id) {
         this.id = id;
     }
 
@@ -14,8 +14,8 @@ public final class Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return Objects.equal(id, item.id);
+        User user = (User) o;
+        return Objects.equal(id, user.id);
     }
 
     @Override
@@ -25,7 +25,7 @@ public final class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "User{" +
                 "id=" + id +
                 '}';
     }

@@ -1,11 +1,15 @@
 package com.mmakowski.bauc.api;
 
+import java.util.Optional;
+
 public interface Auctions {
-    void listItem(Item item);
+    User addUser(UserRegistration user);
 
-    void recordBid(Bid bid);
+    Item listItem(ItemRegistration item);
 
-    Bid winningBid(int itemId);
+    void recordBid(Bid bid) throws BidException;
+
+    Optional<Bid> winningBid(int itemId);
 
     Iterable<Bid> allBidsForItem(int itemId);
 
