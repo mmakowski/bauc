@@ -7,7 +7,7 @@ public interface Auctions {
 
     Item listItem(ItemRegistration item);
 
-    void recordBid(Bid bid) throws BidException;
+    void recordBid(Bid bid) throws BidTooLowException;
 
     Optional<Bid> winningBid(int itemId);
 

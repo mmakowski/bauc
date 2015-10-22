@@ -45,7 +45,7 @@ public final class H2Auctions implements Auctions {
     }
 
     @Override
-    public void recordBid(final Bid bid) throws BidException {
+    public void recordBid(final Bid bid) throws BidTooLowException {
         ensureIsHigherThanCurrentWinning(bid);
         sqlExceptionToRuntimeException(() -> {
             try (PreparedStatement stmt = connection.prepareStatement(

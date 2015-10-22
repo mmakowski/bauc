@@ -63,7 +63,7 @@ public final class H2AuctionsTest {
         bids.forEach((bid) -> {
             try {
                 sut.recordBid(bid);
-            } catch (BidException e) {
+            } catch (BidTooLowException e) {
                 throw new RuntimeException(e);
             }
         });
@@ -82,7 +82,7 @@ public final class H2AuctionsTest {
     }
 
     @Test
-    public void onlyBidIsTheWinningBid() throws BidException {
+    public void onlyBidIsTheWinningBid() throws BidTooLowException {
         final H2Auctions sut = new H2Auctions();
         final Item item = sut.listItem(new ItemRegistration());
         final User user = sut.addUser(new UserRegistration());
@@ -93,23 +93,23 @@ public final class H2AuctionsTest {
     }
 
     @Test
-    public void highestBidWins() throws BidException {
+    public void highestBidWins() throws BidTooLowException {
         final H2Auctions sut = twoUsersBidOnTheSameItem(4, 5);
 
         Assert.assertEquals(Optional.of(new Bid(1, 2, 5)), sut.winningBid(1));
     }
 
     @Test(expected=BidTooLowException.class)
-    public void bidIsRejectedIfHigherBidAlreadyEntered() throws BidException {
+    public void bidIsRejectedIfHigherBidAlreadyEntered() throws BidTooLowException {
         twoUsersBidOnTheSameItem(5, 4);
     }
 
     @Test(expected=BidTooLowException.class)
-    public void bidIsRejectedIfEqualBidAlreadyEntered() throws BidException {
+    public void bidIsRejectedIfEqualBidAlreadyEntered() throws BidTooLowException {
         twoUsersBidOnTheSameItem(5, 5);
     }
 
-    private static H2Auctions twoUsersBidOnTheSameItem(final int firstAmount, final int secondAmount) throws BidException {
+    private static H2Auctions twoUsersBidOnTheSameItem(final int firstAmount, final int secondAmount) throws BidTooLowException {
         final H2Auctions sut = new H2Auctions();
         final Item item = sut.listItem(new ItemRegistration());
         final User user1 = sut.addUser(new UserRegistration());
@@ -130,7 +130,7 @@ public final class H2AuctionsTest {
     }
 
     @Test
-    public void itemIsOnlyListedOnceEvenIfUserBidManyTimes() throws BidException {
+    public void itemIsOnlyListedOnceEvenIfUserBidManyTimes() throws BidTooLowException {
         final H2Auctions sut = new H2Auctions();
         final Item item = sut.listItem(new ItemRegistration());
         final User user = sut.addUser(new UserRegistration());
@@ -141,7 +141,7 @@ public final class H2AuctionsTest {
     }
 
     @Test
-    public void allItemsUserBidOnAreListed() throws BidException {
+    public void allItemsUserBidOnAreListed() throws BidTooLowException {
         final H2Auctions sut = new H2Auctions();
         final Item item1 = sut.listItem(new ItemRegistration());
         final Item item2 = sut.listItem(new ItemRegistration());
@@ -153,7 +153,7 @@ public final class H2AuctionsTest {
     }
 
     @Test
-    public void itemsOtherUsersBidOnAreNotListed() throws BidException {
+    public void itemsOtherUsersBidOnAreNotListed() throws BidTooLowException {
         final H2Auctions sut = new H2Auctions();
         final Item item1 = sut.listItem(new ItemRegistration());
         final Item item2 = sut.listItem(new ItemRegistration());
